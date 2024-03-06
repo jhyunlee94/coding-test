@@ -15,9 +15,12 @@ public class UniqueEmailAddresses {
 		Set<String> set = new HashSet<>();
 
 		for (String email : emails) {
-			String[] parts = email.split("@");
-			String[] localName = parts[0].split("\\+");
-			set.add(localName[0].replace(".","")+parts[1]);
+			String[] splitEmail = email.split("@");
+			// splitEmail[0] = localName
+			// splitEmail[1] = domainName
+			String[] localName = splitEmail[0].replace(".","").split("\\+");
+			// localName[0] = localName
+			set.add(localName[0] + "@" + splitEmail[1]);
 		}
 
 		return set.size();
